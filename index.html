@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompting Sustainability — Research Project</title>
+<meta name="description" content="A research project examining how generative AI interprets and visualizes urban sustainable streetscapes across Jakarta, Melbourne, and Singapore.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ TOP BAR (SMOOTH-SCROLL ANCHORS) ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="#home" class="brand-mark">Prompting Sustainability</a>
+    <nav id="primary-nav">
+      <a href="#home" data-target="home">Home</a>
+      <a href="#about" data-target="about">About</a>
+      <a href="#papers" data-target="papers">Papers</a>
+      <a href="#datasets" data-target="datasets">Datasets</a>
+      <a href="#funding" data-target="funding">Funding</a>
+      <a href="#news" data-target="news">News</a>
+      <a href="#contact" data-target="contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ============ HOME / HERO ============ -->
+<section id="home">
+  <div class="container">
+    <h1>Prompting Sustainability</h1>
+    <p class="tagline">
+      How does generative AI interpret and visualize urban "sustainable" streetscapes? A cross-city research project examining Jakarta, Melbourne, and Singapore.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <div class="section-eyebrow">About</div>
+      <h2>About the project</h2>
+      <p class="section-subtitle">A cross-city investigation of how generative AI interprets and visualizes "sustainable" urban streetscapes.</p>
+    </div>
+
+    <h3>Motivation</h3>
+    <div class="prose">
+      <p>
+        A sustainable streetscape is commonly associated with greenery, improved pedestrian infrastructure, cycling facilities, and traffic calming — yet the concept itself remains ambiguous and contested. What counts as "sustainable" is deeply contingent on local urban morphology, governance priorities, and socio-cultural expectations. A streetscape considered sustainable in one context may be inappropriate or counterproductive in another.
+      </p>
+      <p>
+        Generative AI tools are now entering the workflows of architects, urban planners, and policy communicators. They can translate text prompts into vivid streetscape visualizations, scaling design ideation in ways previously impossible. But this comes with a risk: when sustainability is applied through generalized transformation rules, it can be reduced to a limited set of recurring features — vegetation, bike lanes, widened sidewalks — replicated across cities regardless of fit. Sustainability may quietly become a standardized aesthetic rather than a place-based strategy.
+      </p>
+      <p>
+        This project asks: do AI-generated outputs reflect context-sensitive improvements, or do they unintentionally standardize what "sustainable" streetscapes should look like across different urban settings?
+      </p>
+    </div>
+
+    <h3>Research questions</h3>
+    <div class="prose">
+      <ol>
+        <li>What general visual characteristics are associated with AI-generated sustainable streetscapes?</li>
+        <li>How does the semantic composition of streetscapes shift during transformation toward becoming "more sustainable"?</li>
+        <li>To what extent do these transformations lead to homogenization of streetscape semantics and a reduction of cross-city variation?</li>
+        <li>How does prompt specificity (context-rich vs. generic) shape what generative AI produces under the label "sustainable"?</li>
+      </ol>
+    </div>
+
+    <h3>Methodology</h3>
+    <div class="prose">
+      <p>
+        The project combines three methodological pillars: <strong>street-view imagery collection</strong> from selected cities (Jakarta, Melbourne, Singapore), <strong>controlled image-to-image transformation</strong> using OpenAI multimodal models (GPT-4o, GPT-5), and <strong>semantic analysis</strong> of the outputs through pre-trained segmentation models (Mask2Former with Swin-Large backbone, trained on ADE20K).
+      </p>
+      <p>
+        Pixel-level segmentation outputs are aggregated into seven domain-relevant categories (sky, vegetation, built structure, road infrastructure, vehicle, water and natural, street furniture) and projected into a shared two-dimensional space using UMAP. Scene typologies are identified through K-Means clustering on the raw images, then projected onto the AI-generated images as a fixed baseline. This design choice — clustering on raw images only — ensures that any redistribution of AI images across clusters reflects a genuine structural shift, not a contamination of the reference geometry.
+      </p>
+      <p>
+        Homogenization is assessed using four complementary metrics: mean pairwise distance, normalized cluster entropy, feature diversity, and convex hull area. Cross-city distinguishability is tested using chi-square independence tests with Cramér's V.
+      </p>
+    </div>
+
+    <figure>
+      <div class="frame">
+        <img src="images/examples_transformation.png" alt="Generation pipeline: raw street-view images transformed by GPT-5 into AI-generated sustainable versions at 1024x1024 resolution.">
+      </div>
+      <figcaption>
+        Image generation pipeline. Raw Google Street View imagery is transformed by GPT-5 into AI-generated "sustainable" versions at 1024 × 1024 resolution.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <div class="frame">
+        <img src="images/examples_cluster.png" alt="Four-cluster typology of streetscapes across raw and AI-generated images, with examples from Jakarta, Melbourne, and Singapore.">
+      </div>
+      <figcaption>
+        Examples from each of the four scene typology clusters (A–D), comparing raw Google Street View imagery against AI-generated counterparts across Jakarta, Melbourne, and Singapore.
+      </figcaption>
+    </figure>
+
+    <h3>Key findings (so far)</h3>
+    <div class="prose">
+      <ul>
+        <li><strong>Vegetation inflation</strong> in every cluster and city, with road and sky area reciprocally compressed.</li>
+        <li><strong>Within-city compositional convergence</strong>: feature diversity declines 23%–31% across the three cities studied.</li>
+        <li><strong>Between-city distinguishability is preserved</strong> — Jakarta, Melbourne, and Singapore remain statistically separable after transformation.</li>
+        <li><strong>Prompt specificity matters</strong>: context-rich prompts produce more balanced streetscapes (with sidewalks, stormwater features, public seating, lighting), while generic prompts default to culturally salient "sustainability markers" — cycle lanes and manicured greenery.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAPERS ============ -->
+<section id="papers">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <div class="section-eyebrow">Papers</div>
+      <h2>Papers</h2>
+      <p class="section-subtitle">Manuscripts produced under this project. Both papers are currently in progress and under journal consideration.</p>
+    </div>
+
+    <ul class="papers-list">
+
+      <!-- Paper 1 -->
+      <li>
+        <span class="paper-status">In Progress</span>
+        <p class="paper-title">
+          Envisioning urban "sustainable" streetscapes through AI-generated street-level imagery: a cross-city semantic analysis
+        </p>
+        <p class="paper-authors">
+          Authors and affiliations to be disclosed upon acceptance.
+        </p>
+        <p class="paper-summary">
+          This study investigates whether AI-driven sustainable streetscape redesign homogenizes semantic diversity and erodes cross-city variation. Using street-view imagery from Jakarta, Melbourne, and Singapore, we generate "more sustainable" versions through a GPT-5 text-guided pipeline and analyze them via semantic segmentation (Mask2Former), joint UMAP embedding, and four complementary diversity metrics. We find that the transformation is systematic rather than neutral: vegetation is inflated while road and sky area are reciprocally compressed, the open-roadscape typology collapses in favor of built-corridor and vegetated scenes, and within-city feature diversity declines 23%–31% across all cities. Between-city distinguishability, however, is preserved. The results suggest that a zero-shot foundation model executes "more sustainable" as a greening instruction — drifting toward a global prototype that absorbs contextual specificity while leaving human-scale and architectural elements largely untouched.
+        </p>
+        <p class="paper-keywords">
+          <strong>Keywords:</strong> Generative AI · GPT-5 · Semantic segmentation · Street view imagery · Sustainable streetscape · UMAP
+        </p>
+      </li>
+
+      <!-- Paper 2 -->
+      <li>
+        <span class="paper-status">In Progress</span>
+        <p class="paper-title">
+          Interpreting "sustainable" streetscapes with generative AI: context-rich vs. generic prompting
+        </p>
+        <p class="paper-authors">
+          Authors and affiliations to be disclosed upon acceptance.
+        </p>
+        <p class="paper-summary">
+          This study investigates how prompt specificity influences GPT-4o's interpretation of sustainable streetscapes in text-to-image generation. Using 100 Jakarta Google Street View scenes across three treatments — raw, non-context (generic sustainability prompt), and context-rich (a prompt specifying ten sustainability categories: sidewalks, street furniture, trees and landscaping, lighting, bicycle infrastructure, stormwater management, public open spaces, building frontage, smart technologies, and mobility systems) — we segment and quantify object appearances and run ANOVA, Tukey HSD, and LPIPS similarity analyses. Results show that context-rich prompts yield more balanced streetscapes — integrating sidewalks, vegetation, stormwater features, lighting, and public seating — aligning with scholarly definitions of integrated, performance-oriented urban design. Generic prompts, in contrast, favor culturally salient "sustainability markers" such as cycle lanes and manicured greenery, underrepresenting ecological and social infrastructure.
+        </p>
+        <p class="paper-keywords">
+          <strong>Keywords:</strong> Google Street View · GPT-4o · Prompt engineering · Sustainable streetscape · Semantic segmentation
+        </p>
+      </li>
+
+    </ul>
+
+    <p class="prose" style="margin-top: 28px; font-size: 14px; color: var(--ink-mute);">
+      Manuscripts are currently under journal consideration. Preprints, full citations, and links will be added once available.
+    </p>
+  </div>
+</section>
+
+<!-- ============ DATASETS ============ -->
+<section id="datasets">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <div class="section-eyebrow">Datasets</div>
+      <h2>Datasets</h2>
+      <p class="section-subtitle">Open-access datasets released under the project, hosted on Zenodo and Hugging Face.</p>
+    </div>
+
+    <h3>Dataset v1 — Jakarta, prompt-treatment study</h3>
+    <div class="prose">
+      <p>
+        Our first dataset accompanies the prompt-specificity study. It contains 100 Jakarta Google Street View scenes, each accompanied by two GPT-4o generated counterparts — one produced under a generic "non-context" sustainability prompt, and one under a "context-rich" prompt that explicitly enumerates ten sustainability categories (sidewalks, street furniture, trees and landscaping, lighting, bicycle infrastructure, stormwater management, public open spaces, building frontage, smart technologies, and mobility systems).
+      </p>
+      <p>
+        The dataset enables direct comparative study of how prompt specificity reshapes AI's interpretation of sustainability at the streetscape level, and includes both raw images and segmented counterparts.
+      </p>
+    </div>
+
+    <figure>
+      <div class="frame">
+        <img src="images/example_generated.jpg" alt="Examples of raw, context, and noncontext generated streetscapes for Jakarta scenes.">
+      </div>
+      <figcaption>
+        Example entries from Dataset v1. Each row pairs a raw Jakarta street-view scene with its context-rich and non-context AI-generated counterparts.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <div class="frame">
+        <img src="images/segmented_example.jpg" alt="Segmented versions of the raw, context, and noncontext images alongside their semantic masks.">
+      </div>
+      <figcaption>
+        Each entry is paired with semantic segmentation outputs. Pixel-level masks support quantitative analysis of object appearance under different prompt treatments.
+      </figcaption>
+    </figure>
+
+    <div class="data-block">
+      <div class="data-meta">Zenodo · Open access</div>
+      <h3>Sustainable streetscape, prompt-specificity dataset</h3>
+      <p>
+        100 Jakarta scenes × 3 treatments (raw, context, non-context), with paired segmentation masks. Full descriptions of fields, file structure, and generation parameters are documented on the Zenodo record page.
+      </p>
+      <div class="dl-links">
+        <a href="https://zenodo.org/records/18737094" target="_blank" rel="noopener">View on Zenodo →</a>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 40px;">Dataset v2 — Cross-city corpus</h3>
+    <div class="prose">
+      <p>
+        The second dataset widens the scope from a single city to three: Jakarta, Melbourne, and Singapore. We collected 1,000 random points per city along OpenStreetMap road networks, retrieved the nearest available Google Street View imagery, and filtered for indoor, blurred, and non-representative scenes. The final corpus contains 567 images from Jakarta, 832 from Melbourne, and 694 from Singapore.
+      </p>
+      <p>
+        Each raw scene is paired with a GPT-5 generated "more sustainable" counterpart (2,093 raw + 2,093 generated = 4,186 images total). All images are standardized to 640 × 640 pixels.
+      </p>
+    </div>
+
+    <div class="data-block">
+      <div class="data-meta">Hugging Face · Open access</div>
+      <h3>genai_sustainablestreetscape</h3>
+      <p>
+        Cross-city corpus of paired raw and AI-generated streetscapes from Jakarta, Melbourne, and Singapore. Includes generation parameters, source coordinates, and metadata sufficient to reproduce the cross-city semantic analysis.
+      </p>
+      <div class="dl-links">
+        <a href="https://huggingface.co/datasets/rpradana36/genai_sustainablestreetscape" target="_blank" rel="noopener">View on Hugging Face →</a>
+      </div>
+    </div>
+
+    <p class="prose" style="margin-top: 24px; font-size: 14px; color: var(--ink-mute);">
+      Both datasets are released under open-access terms — see the respective repository pages for citation information and licensing details.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FUNDING ============ -->
+<section id="funding">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <div class="section-eyebrow">Funding</div>
+      <h2>Funding</h2>
+      <p class="section-subtitle">Grants supporting the Prompting Sustainability research project.</p>
+    </div>
+
+    <p class="prose" style="margin-bottom: 8px;">This research is supported by the following grant.</p>
+
+    <ul class="grants-list">
+      <li>
+        <div class="grant-title">BiSA Q1 Hi-Impact EQUITY WCU 2025</div>
+        <div class="grant-funder">Universitas Indonesia</div>
+        <div class="grant-meta">Effective: 22 October 2025 → 24 August 2026</div>
+      </li>
+    </ul>
+
+    <p class="prose" style="margin-top: 24px; font-size: 14px; color: var(--ink-mute);">
+      Additional funding sources will be listed as the project progresses.
+    </p>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section id="news">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <div class="section-eyebrow">News</div>
+      <h2>News &amp; updates</h2>
+      <p class="section-subtitle">Project announcements, talks, dataset releases, and publications.</p>
+    </div>
+
+    <!--
+      ============ HOW TO ADD A NEWS ITEM ============
+      Copy the template below inside the <ul class="news-list"> tag,
+      filling in the date and content. Newest entries go at the top.
+
+        <li>
+          <span class="date">DD Month YYYY</span>
+          <span>Your news item content here. You can include <a href="#">links</a> as needed.</span>
+        </li>
+
+      Remove the .news-empty block once you have at least one entry.
+    ================================================
+    -->
+
+    <ul class="news-list">
+      <!-- News items will appear here -->
+    </ul>
+
+    <div class="news-empty">
+      No news yet. Updates will be posted here as the project progresses.
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <div class="section-eyebrow">Contact</div>
+      <h2>Contact</h2>
+      <p class="section-subtitle">For project inquiries, dataset access questions, or collaboration proposals.</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-avatar">
+        <img src="images/IMGL0162 s - Copy (1).jpg" alt="Mohammad Raditia Pradana">
+      </div>
+      <div class="contact-body">
+        <h3 class="contact-name">Mohammad Raditia Pradana</h3>
+        <p class="contact-affiliation">Universitas Indonesia</p>
+
+        <ul class="contact-links">
+          <li>
+            <span class="contact-label">Email</span>
+            <a href="mailto:mohammad.raditia03@ui.ac.id">mohammad.raditia03@ui.ac.id</a>
+          </li>
+          <li>
+            <span class="contact-label">Personal site</span>
+            <a href="https://aditpradana36.github.io/" target="_blank" rel="noopener">aditpradana36.github.io</a>
+          </li>
+          <li>
+            <span class="contact-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/mohammadraditia/" target="_blank" rel="noopener">linkedin.com/in/mohammadraditia</a>
+          </li>
+          <li>
+            <span class="contact-label">ORCID</span>
+            <a href="https://orcid.org/0009-0005-8836-6801" target="_blank" rel="noopener">0009-0005-8836-6801</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <p>Prompting Sustainability — A research project at Universitas Indonesia.</p>
+    <p>Last updated April 2026.</p>
+  </div>
+</footer>
+
+<!-- ============ SCROLLSPY: highlight active nav link as user scrolls ============ -->
+<script>
+  (function () {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('#primary-nav a[data-target]');
+
+    function setActive(id) {
+      navLinks.forEach(a => {
+        if (a.dataset.target === id) a.classList.add('active');
+        else a.classList.remove('active');
+      });
+    }
+
+    // IntersectionObserver — picks the section currently in view
+    const observer = new IntersectionObserver((entries) => {
+      // Pick the entry that's most visible
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActive(visible.target.id);
+    }, {
+      // Sections trigger when their middle area crosses near the top of viewport
+      rootMargin: '-30% 0px -60% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1]
+    });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Default: home active on initial load
+    setActive('home');
+  })();
+</script>
+
+</body>
+</html>
